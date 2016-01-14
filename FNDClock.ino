@@ -6,7 +6,7 @@
 // =================================================================
 // The MIT License 
 // 
-// Copyright (c) 2016 Sung-ho Lee.
+// Copyright (c) 2016 Sung-ho Lee
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -47,7 +47,32 @@
 
 #include <Wire.h>
 
+// BOF preprocessor bug prevent
+#if 1
+__asm volatile ("nop");
+#endif
+
+// Decides wheather numbers should be straight or upside-down. Uncomment to display flipped numbers.
+//#define FND_UPSIDE_DOWN
+
 const byte RTC_ADDRESS = B1101000;
+#ifdef FND_UPSIDE_DOWN
+// Flipped numbers
+const boolean FND[10][7] =
+  {
+    {1,1,1,1,1,1,0}, // 0
+    {0,1,1,0,0,0,0}, // 1
+    {1,0,1,1,0,1,1}, // 2
+    {1,1,1,1,0,0,1}, // 3
+    {0,1,1,0,1,0,1}, // 4
+    {1,1,0,1,1,0,1}, // 5
+    {1,1,0,1,1,1,1}, // 6
+    {0,1,1,1,1,0,0}, // 7
+    {1,1,1,1,1,1,1}, // 8
+    {1,1,1,1,1,0,1}  // 9
+  };
+#else
+// Straight numbers
 const boolean FND[10][7] =
   {
     {1,1,1,1,1,1,0}, // 0
@@ -61,6 +86,7 @@ const boolean FND[10][7] =
     {1,1,1,1,1,1,1}, // 8
     {1,1,1,1,0,1,1}  // 9
   };
+#endif
 
 byte time[3] = {0, 0, 0}; // Second, minute, hour
 unsigned long lastMillis = 0;
