@@ -109,12 +109,13 @@ void loop() {
   if (abs(currentMillis - lastMillis) >= 500) {
     lastMillis = currentMillis;
     getTime();
-    timeToNumber();
-    splitNumber();
+    prepareToDisplay();
+    printTime();
   }
   displayNumber();
 }
 
+/***** Serial communication *****/
 void serialEvent() {
   // Recieve time data via serial connection.
   // Data formatted in BCD.
@@ -123,6 +124,15 @@ void serialEvent() {
   Serial.readBytes(newTime, 3);
   setTimeWithBCD(newTime[0], newTime[1], newTime[2]);
 }
+
+void printTime() {
+  Serial.print(time[2]);
+  Serial.print(":");
+  Serial.print(time[1]);
+  Serial.print(":");
+  Serial.println(time[0]);
+}
+/********************************/
 
 /***** Format Conversion *****/
 byte decimalToBCD (byte decimal) {
@@ -201,6 +211,11 @@ void splitNumber() {
   displayMem[1] = (numberToDisplay - (displayMem[0] * 1000)) / 100;
   displayMem[2] = (numberToDisplay - (displayMem[0] * 1000) - (displayMem[1] * 100)) / 10;
   displayMem[3] = (numberToDisplay - (displayMem[0] * 1000) - (displayMem[1] * 100) - (displayMem[2] * 10));
+}
+
+void prepareToDisplay() {
+  timeToNumber();
+  splitNumber();
 }
 
 void displayNumber() {
