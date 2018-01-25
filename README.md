@@ -40,13 +40,3 @@ Send 3 bytes of data via serial(baudrate:9600)
 <li>Order: second, minute, hour</li>
 <li>Format: BCD</li>
 </ul>
-
-## Donation
-If you find this project useful for you and if you want, you can donate me.
-
-### Paypal
-[Donate via Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KRGC3AGNBUU9S)
-
-### Bitcoin
-![QR code](http://chart.apis.google.com/chart?chs=200x200&cht=qr&chld=|1&chl=1NL1wZ2pgeyyvhAnh51YDaWwX34GoSFZA1)<br>
-1NL1wZ2pgeyyvhAnh51YDaWwX34GoSFZA1
